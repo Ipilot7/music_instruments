@@ -17,10 +17,10 @@ dependencies:
   http: ^0.13.5
   screensize_utils:
     git:
-      url: https://github.com/Ipilot7/ScreenSizeUtil.git       
+      url: https://github.com/Ipilot7/ScreenSizeUtil.git
       ref: main # branch name
-  
-  
+
+
 
 dev_dependencies:
   flutter_test:
@@ -33,12 +33,12 @@ flutter:
     - assets/images/
     - assets/icons/
 
- 
+
   fonts:
     - family: Bangers
       fonts:
         - asset: assets/fonts/Bangers-Regular.ttf
-       
+
     - family: GreatVibes
       fonts:
         - asset: assets/fonts/GreatVibes-Regular.ttf

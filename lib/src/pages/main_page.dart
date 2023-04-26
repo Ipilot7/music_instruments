@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:music_instruments/src/helpers/apptheme.dart';
 import 'package:music_instruments/src/helpers/utils.dart';
 import 'package:music_instruments/src/pages/catalog.dart';
+import 'package:screensize_utils/screensize_util.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -46,13 +47,13 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
             Positioned(
-              bottom: 77,
-              right: 109,
+              bottom: 77.h,
+              right: 109.w,
               child: GestureDetector(
                 onTap: () => pushTo(const CatalogPage(), context),
                 child: Container(
-                    height: 57,
-                    width: 133,
+                    height: 57.h,
+                    width: 133.w,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(40),
