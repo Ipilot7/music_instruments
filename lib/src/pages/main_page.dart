@@ -23,16 +23,16 @@ class _MainPageState extends State<MainPage> {
         backgroundColor: Colors.transparent,
         body: Stack(
           children: [
-            const SizedBox(height: 20),
+            SizedBox(height: 20.h),
             Positioned(
-              top: 20,
-              left: 20,
+              top: 20.h,
+              left: 20.w,
               child: Container(
-                  width: 36,
-                  height: 36,
+                  width: 36.w,
+                  height: 36.h,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                      border: Border.all(width: 2, color: AppTheme.border),
+                      border: Border.all(width: 2.w, color: AppTheme.border),
                       color: AppTheme.background,
                       shape: BoxShape.circle),
                   child: Text(
@@ -52,8 +52,8 @@ class _MainPageState extends State<MainPage> {
               child: GestureDetector(
                 onTap: () => pushTo(const CatalogPage(), context),
                 child: Container(
-                    height: 57.h,
-                    width: 133.w,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 31.w, vertical: 3.h),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(40),
