@@ -15,6 +15,12 @@ dependencies:
   shared_preferences: ^2.1.0
   connectivity_plus: ^3.0.4
   http: ^0.13.5
+  screensize_utils:
+    git:
+      url: https://github.com/Ipilot7/ScreenSizeUtil.git       
+      ref: main # branch name
+  
+  
 
 dev_dependencies:
   flutter_test:

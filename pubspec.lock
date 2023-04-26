@@ -256,6 +256,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.2.4"
+  screensize_utils:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: main
+      resolved-ref: "71846a0fb9d9d2497a1a3dd075d482b8ecf600ab"
+      url: "https://github.com/Ipilot7/ScreenSizeUtil.git"
+    source: git
+    version: "1.0.0+1"
   shared_preferences:
     dependency: "direct main"
     description:
