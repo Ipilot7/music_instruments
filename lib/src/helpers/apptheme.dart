@@ -4,6 +4,7 @@ class AppTheme {
   static const Color background = Color(0xFF9A7046);
   static const Color border = Color(0xFFFFE9CF);
   static const Color primaryColor = Color(0xffC59062);
+  static const Color dialog = Color(0xffDAB680);
 
   static const String fontFamily = "Bangers";
   static const String greatVibes = "GreatVibes";

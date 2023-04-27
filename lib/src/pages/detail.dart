@@ -24,8 +24,12 @@ class _DetailScreenState extends State<DetailScreen> {
                 width: 293.w,
                 height: 198.h,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.r),
-                    color: AppTheme.border),
+                  image: const DecorationImage(
+                      image: AssetImage('assets/images/def.png'),
+                      fit: BoxFit.scaleDown),
+                  borderRadius: BorderRadius.circular(12.r),
+                  gradient: AppTheme.linearGradient,
+                ),
               ),
               SizedBox(height: 43.h),
               Padding(

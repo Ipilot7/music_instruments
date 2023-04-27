@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:music_instruments/src/helpers/apptheme.dart';
 import 'package:music_instruments/src/helpers/utils.dart';
 import 'package:music_instruments/src/pages/detail.dart';
+import 'package:music_instruments/src/pages/music_details.dart';
 import 'package:screensize_utils/screensize_util.dart';
 
 import '../widgets/background.dart';
@@ -14,6 +15,7 @@ class TypesScreen extends StatefulWidget {
 }
 
 class _TypesScreenState extends State<TypesScreen> {
+  bool isMusic = false;
   @override
   Widget build(BuildContext context) {
     return BackgroundApp(
@@ -31,16 +33,26 @@ class _TypesScreenState extends State<TypesScreen> {
             (index) {
               return GestureDetector(
                 onTap: () {
-                  pushTo(const DetailScreen(), context);
+                  if (isMusic) {
+                    pushTo(const MusicDetailScreen(), context);
+                  } else {
+                    pushTo(const DetailScreen(), context);
+                  }
                 },
                 child: Column(
                   children: [
-                    Container(
-                      width: 215.w,
-                      height: 146.h,
-                      decoration: BoxDecoration(
+                    Flexible(
+                      child: Container(
+                        width: 215.w,
+                        height: 146.h,
+                        decoration: BoxDecoration(
+                          image: const DecorationImage(
+                              image: AssetImage('assets/images/def.png'),
+                              fit: BoxFit.scaleDown),
                           borderRadius: BorderRadius.circular(12.r),
-                          color: AppTheme.border),
+                          gradient: AppTheme.linearGradient,
+                        ),
+                      ),
                     ),
                     SizedBox(height: 24.h),
                     SizedBox(
