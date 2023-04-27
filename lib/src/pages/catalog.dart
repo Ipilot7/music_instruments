@@ -6,6 +6,7 @@ import 'package:music_instruments/src/helpers/data/user_model.dart';
 import 'package:music_instruments/src/helpers/utils.dart';
 import 'package:music_instruments/src/pages/types.dart';
 import 'package:music_instruments/src/widgets/background.dart';
+import 'package:music_instruments/src/widgets/dialogs_mixin.dart';
 import 'package:screensize_utils/screensize_util.dart';
 
 class CatalogPage extends StatefulWidget {
@@ -15,7 +16,7 @@ class CatalogPage extends StatefulWidget {
   State<CatalogPage> createState() => _CatalogPageState();
 }
 
-class _CatalogPageState extends State<CatalogPage> {
+class _CatalogPageState extends State<CatalogPage> with Dialogs {
   int selectedCategoryId = 0;
   bool isChange = false;
 
@@ -41,16 +42,23 @@ class _CatalogPageState extends State<CatalogPage> {
                     itemCount: categoryList.length + 1,
                     itemBuilder: (_, index) {
                       if (index == categoryList.length) {
-                        return Container(
-                          width: 215.w,
-                          height: 146.h,
-                          decoration: BoxDecoration(
-                              gradient: AppTheme.linearGradient,
-                              borderRadius: BorderRadius.circular(12.r),
-                              color: AppTheme.border),
-                          child: SvgPicture.asset(
-                            'assets/icons/addcircle.svg',
-                            fit: BoxFit.none,
+                        return InkWell(
+                          overlayColor: const MaterialStatePropertyAll(
+                              Colors.transparent),
+                          onTap: () {
+                            // showDialogCategory(context);
+                          },
+                          child: Container(
+                            width: 215.w,
+                            height: 146.h,
+                            decoration: BoxDecoration(
+                                gradient: AppTheme.linearGradient,
+                                borderRadius: BorderRadius.circular(12.r),
+                                color: AppTheme.border),
+                            child: SvgPicture.asset(
+                              'assets/icons/add.svg',
+                              fit: BoxFit.none,
+                            ),
                           ),
                         );
                       }
