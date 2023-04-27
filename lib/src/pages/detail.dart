@@ -19,16 +19,25 @@ class _DetailScreenState extends State<DetailScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              SizedBox(height: 50.h),
               Container(
-                width: 215.w,
-                height: 146.h,
+                width: 293.w,
+                height: 198.h,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12.r),
                     color: AppTheme.border),
               ),
-              SizedBox(height: 24.h),
-              const Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque commodo lacus at sodales sodales. Quisque sagittis orci ut diam condimentum, vel')
+              SizedBox(height: 43.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 70.w),
+                child: Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque commodo lacus at sodales sodales. Quisque sagittis orci ut diam condimentum, vel',
+                  style: TextStyle(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'Inter'),
+                ),
+              )
             ],
           ),
         ),
