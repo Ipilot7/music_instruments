@@ -1,56 +1,100 @@
-class UserModel {
-  int? id;
-  // int? status;
-  int? activeTariffId;
-  String? authKey;
-  String? img;
-  String? firstname;
-  String? lastname;
-  String? deviceId;
-  String? deviceName;
-  String? deviceToken;
-  String? username;
-  int? allowedDevicesCount;
+import 'package:music_instruments/src/helpers/data/models.dart';
 
-  UserModel(
-      {this.id,
-      // this.status,
-      this.allowedDevicesCount,
-      this.img,
-      this.authKey,
-      this.username,
-      this.firstname,
-      this.lastname,
-      this.deviceId,
-      this.deviceName,
-      this.deviceToken});
+final List<SubCategoryItem> subCategoryItemsList = [
+  ...List.generate(
+    10,
+    (index) => SubCategoryItem(
+      id: index,
+      subCategoryId: 0,
+      title: 'Sato $index',
+      image: 'assets/images/def_image.png',
+      desc:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante fermentum sit amet.',
+    ),
+  ),
+  ...List.generate(
+    12,
+    (index) => SubCategoryItem(
+      id: index,
+      subCategoryId: 1,
+      title: 'Tambur $index',
+      image: 'assets/images/def_image.png',
+      desc:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante fermentum sit amet.',
+    ),
+  ),
+  ...List.generate(
+    4,
+    (index) => SubCategoryItem(
+      id: index,
+      subCategoryId: 2,
+      title: 'Sato $index',
+      image: 'assets/images/def_image.png',
+      desc:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante fermentum sit amet.',
+    ),
+  ),
+  ...List.generate(
+    10,
+    (index) => SubCategoryItem(
+      id: index,
+      subCategoryId: 3,
+      title: 'Tambur $index',
+      image: 'assets/images/def_image.png',
+      desc:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante fermentum sit amet.',
+    ),
+  ),
+];
 
-  UserModel.fromJson(Map<String, dynamic> json) {
-    // status = json['status'];
-    img = json['img'];
-    firstname = json['firstname'];
-    lastname = json['lastname'];
-    deviceId = json['device_id'];
-    deviceName = json['device_name'];
-    deviceToken = json['device_token'];
-    id = json['id'];
-    authKey = json['auth_key'];
-    username = json['username'];
-    allowedDevicesCount = json['allowed_devices_count'];
-  }
+final List<SubCategory> subCategoryList = [
+  ...List.generate(
+    6,
+    (index) => SubCategory(
+      id: index,
+      categoryId: 0,
+      title: 'O‘zbek cholg‘ulari tarixi',
+      image: 'assets/images/def_image.png',
+      items: subCategoryItemsList
+          .where((element) => element.subCategoryId == index)
+          .toList(),
+    ),
+  ),
+  ...List.generate(
+    9,
+    (index) => SubCategory(
+      id: index,
+      categoryId: 1,
+      title: 'O‘zbek $index',
+      image: 'assets/images/def_image.png',
+      items: subCategoryItemsList
+          .where((element) => element.subCategoryId == index)
+          .toList(),
+    ),
+  ),
+  ...List.generate(
+    10,
+    (index) => SubCategory(
+      id: index,
+      categoryId: 2,
+      title: 'O‘zbek tarixi $index',
+      image: 'assets/images/def_image.png',
+      items: subCategoryItemsList
+          .where((element) => element.subCategoryId == index)
+          .toList(),
+    ),
+  ),
+];
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['img'] = img;
-    data['firstname'] = firstname;
-    data['lastname'] = lastname;
-    data['device_id'] = deviceId;
-    data['device_name'] = deviceName;
-    data['device_token'] = deviceToken;
-    data['id'] = id;
-    data['auth_key'] = authKey;
-    data['username'] = username;
-    data['allowed_devices_count'] = allowedDevicesCount;
-    return data;
-  }
-}
+final List<CategoryModel> categoryList = [
+  ...List.generate(
+    3,
+    (index) => CategoryModel(
+      id: index,
+      image: 'assets/images/def_image.png',
+      items: subCategoryList
+          .where((element) => element.categoryId == index)
+          .toList(),
+    ),
+  ),
+];
