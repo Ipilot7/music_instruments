@@ -27,13 +27,13 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: const MainPage(),
           builder: (BuildContext context, Widget? child) {
             return MediaQuery(
               data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
               child: child!,
             );
           },
+          home: const MainPage(),
         );
       },
     );

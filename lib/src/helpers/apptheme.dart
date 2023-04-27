@@ -3,10 +3,15 @@ import 'package:flutter/cupertino.dart';
 class AppTheme {
   static const Color background = Color(0xFF9A7046);
   static const Color border = Color(0xFFFFE9CF);
+  static const Color primaryColor = Color(0xffC59062);
 
   static const String fontFamily = "Bangers";
   static const String greatVibes = "GreatVibes";
-
+  static const LinearGradient linearGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [AppTheme.primaryColor, Color(0xffF6D891)],
+  );
   static const TextStyle textStyle = TextStyle(
     color: Color(0xFFFFFFFF),
     fontFamily: fontFamily,
@@ -176,9 +181,9 @@ class AppTheme {
     overflow: TextOverflow.ellipsis,
   );
 
-  // static MaskTextInputFormatter numberMaskFormatter = MaskTextInputFormatter(
-  //   mask: ' ## ### ## ##',
-  //   filter: {"#": RegExp(r'\d')},
-  //   type: MaskAutoCompletionType.eager,
-  // );
+// static MaskTextInputFormatter numberMaskFormatter = MaskTextInputFormatter(
+//   mask: ' ## ### ## ##',
+//   filter: {"#": RegExp(r'\d')},
+//   type: MaskAutoCompletionType.eager,
+// );
 }
