@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:music_instruments/src/helpers/apptheme.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:music_instruments/src/helpers/data/user_model.dart';
+import 'package:music_instruments/src/helpers/utils.dart';
+import 'package:music_instruments/src/pages/types.dart';
 import 'package:music_instruments/src/widgets/background.dart';
 import 'package:screensize_utils/screensize_util.dart';
 
@@ -12,137 +16,151 @@ class CatalogPage extends StatefulWidget {
 }
 
 class _CatalogPageState extends State<CatalogPage> {
+  int selectedCategoryId = 0;
+  bool isChange = false;
+
   @override
   Widget build(BuildContext context) {
     return BackgroundApp(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: ListView(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: List.generate(
-                3,
-                (index) => GestureDetector(
-                  onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (_) {
-                          return AlertDialog(
-                            backgroundColor: AppTheme.dialog,
-                            shape: RoundedRectangleBorder(
+        body: SafeArea(
+          child: ListView(
+            physics: const NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.only(top: 20.h),
+            children: [
+              SizedBox(
+                height: 146.h,
+                child: AnimationLimiter(
+                  child: ListView.separated(
+                    padding: EdgeInsets.symmetric(horizontal: 36.w),
+                    physics: const BouncingScrollPhysics(),
+                    separatorBuilder: (_, index) => SizedBox(width: 30.w),
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemCount: categoryList.length + 1,
+                    itemBuilder: (_, index) {
+                      if (index == categoryList.length) {
+                        return Container(
+                          width: 215.w,
+                          height: 146.h,
+                          decoration: BoxDecoration(
+                              gradient: AppTheme.linearGradient,
                               borderRadius: BorderRadius.circular(12.r),
+                              color: AppTheme.border),
+                          child: SvgPicture.asset(
+                            'assets/icons/addcircle.svg',
+                            fit: BoxFit.none,
+                          ),
+                        );
+                      }
+                      return AnimationConfiguration.staggeredList(
+                        position: index,
+                        duration: const Duration(milliseconds: 500),
+                        child: SlideAnimation(
+                          verticalOffset: 50.0,
+                          child: FadeInAnimation(
+                            child: InkWell(
+                              overlayColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                              onTap: selectedCategoryId != index
+                                  ? () {
+                                      setState(
+                                          () => selectedCategoryId = index);
+                                      isChange = true;
+                                      Future.delayed(
+                                        const Duration(milliseconds: 100),
+                                        () => setState(() => isChange = false),
+                                      );
+                                    }
+                                  : null,
+                              child: Container(
+                                width: 215.w,
+                                height: 146.h,
+                                decoration: BoxDecoration(
+                                    gradient: AppTheme.linearGradient,
+                                    borderRadius: BorderRadius.circular(12.r),
+                                    color: AppTheme.border),
+                                child: Image.asset(
+                                    categoryList[selectedCategoryId].image),
+                              ),
                             ),
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Container(
-                                  width: 100.h,
-                                  height: 100.h,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12.r),
-                                      gradient: AppTheme.linearGradient),
-                                  child:
-                                      SvgPicture.asset('assets/icons/add.svg'),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 15.h),
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                width: 2.w,
-                                                color: AppTheme.border),
-                                            borderRadius:
-                                                BorderRadius.circular(8.r)),
-                                        hintText: 'Nomi',
-                                        hintStyle: TextStyle(
-                                            fontSize: 18.sp,
-                                            fontFamily: 'Inter',
-                                            fontWeight: FontWeight.w500,
-                                            color: AppTheme.border),
-                                        border: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                width: 2.w,
-                                                color: AppTheme.border),
-                                            borderRadius:
-                                                BorderRadius.circular(8.r))),
-                                  ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                      gradient: AppTheme.linearGradient,
-                                      borderRadius:
-                                          BorderRadius.circular(12.r)),
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 7.h, horizontal: 21.w),
-                                  child: Text(
-                                    'Saqlash',
-                                    style: TextStyle(
-                                        fontSize: 24.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.white,
-                                        fontFamily: AppTheme.fontFamily),
-                                  ),
-                                )
-                              ],
-                            ),
-                          );
-                        });
-                  },
-                  child: Container(
-                    width: 215.w,
-                    height: 146.h,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12.r),
-                        color: AppTheme.border),
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 55.h),
-            Container(
-              alignment: Alignment.center,
-              // margin: EdgeInsets.symmetric(horizontal: 30 . w),
-              height: 150.h,
-              child: ListView.separated(
-                  padding: EdgeInsets.symmetric(horizontal: 21.w),
-                  physics: const BouncingScrollPhysics(),
-                  separatorBuilder: (_, index) => SizedBox(width: 20.w),
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  itemCount: 10,
-                  itemBuilder: (_, index) => GestureDetector(
-                        onTap: () {
-                          // pushTo(const TypesScreen(), context);
-                        },
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 100.h,
-                              height: 100.h,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12.r),
-                                  color: AppTheme.border),
-                            ),
-                            SizedBox(height: 6.h),
-                            SizedBox(
-                              width: 100.h,
-                              child: Text(
-                                'O‘zbek cholg‘ulari tarixi',
-                                style: TextStyle(
-                                    fontSize: 14.sp, fontFamily: 'Inter'),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.center,
+              isChange
+                  ? const SizedBox()
+                  : Container(
+                      alignment: Alignment.center,
+                      height: 150.h,
+                      margin: EdgeInsets.only(top: 35.h),
+                      child: AnimationLimiter(
+                        child: ListView.separated(
+                          padding: EdgeInsets.symmetric(horizontal: 36.w),
+                          physics: const BouncingScrollPhysics(),
+                          separatorBuilder: (_, index) => SizedBox(width: 20.w),
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          itemCount:
+                              categoryList[selectedCategoryId].items.length,
+                          itemBuilder: (_, index) => GestureDetector(
+                            onTap: () {
+                              pushTo(
+                                  TypesScreen(subCategoryId: index), context);
+                            },
+                            child: AnimationConfiguration.staggeredList(
+                              position: index,
+                              duration: const Duration(milliseconds: 500),
+                              child: SlideAnimation(
+                                verticalOffset: 50.0,
+                                child: FadeInAnimation(
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        width: 100.h,
+                                        height: 100.h,
+                                        margin: EdgeInsets.only(bottom: 6.h),
+                                        padding: EdgeInsets.all(10.h),
+                                        decoration: BoxDecoration(
+                                            gradient: AppTheme.linearGradient,
+                                            borderRadius:
+                                                BorderRadius.circular(12.r),
+                                            color: AppTheme.border),
+                                        child: Image.asset(
+                                            categoryList[selectedCategoryId]
+                                                .items[index]
+                                                .image),
+                                      ),
+                                      SizedBox(
+                                        width: 100.h,
+                                        child: Text(
+                                          categoryList[selectedCategoryId]
+                                              .items[index]
+                                              .title,
+                                          style: TextStyle(
+                                            fontSize: 14.sp,
+                                            fontFamily: 'Inter',
+                                          ),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ),
-                            )
-                          ],
+                            ),
+                          ),
                         ),
-                      )),
-            ),
-          ],
+                      ),
+                    ),
+            ],
+          ),
         ),
       ),
     );
