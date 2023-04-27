@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:music_instruments/src/helpers/apptheme.dart';
+import 'package:music_instruments/src/pages/detail.dart';
 import 'package:screensize_utils/screensize_util.dart';
 
 import '../widgets/background.dart';
@@ -27,27 +28,35 @@ class _TypesScreenState extends State<TypesScreen> {
           children: List.generate(
             20,
             (index) {
-              return Column(
-                children: [
-                  Container(
-                    width: 215.w,
-                    height: 146.h,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12.r),
-                        color: AppTheme.border),
-                  ),
-                  SizedBox(height: 24.h),
-                  SizedBox(
-                    width: 215.h,
-                    child: Text(
-                      'O‘zbek cholg‘ulari tarixi',
-                      style: TextStyle(fontSize: 24.sp, fontFamily: 'Inter'),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
+              return InkWell(
+                overlayColor: MaterialStateProperty.all(Colors.transparent),
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DetailScreen(),
+                    )),
+                child: Column(
+                  children: [
+                    Container(
+                      width: 215.w,
+                      height: 146.h,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.r),
+                          color: AppTheme.border),
                     ),
-                  )
-                ],
+                    SizedBox(height: 24.h),
+                    SizedBox(
+                      width: 215.h,
+                      child: Text(
+                        'O‘zbek cholg‘ulari tarixi',
+                        style: TextStyle(fontSize: 24.sp, fontFamily: 'Inter'),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                      ),
+                    )
+                  ],
+                ),
               );
             },
           ),
