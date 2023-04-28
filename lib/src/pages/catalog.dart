@@ -46,7 +46,7 @@ class _CatalogPageState extends State<CatalogPage> with Dialogs {
                           overlayColor: const MaterialStatePropertyAll(
                               Colors.transparent),
                           onTap: () {
-                            // showDialogCategory(context);
+                            showDialogCategory(context);
                           },
                           child: Container(
                             width: 215.w,
