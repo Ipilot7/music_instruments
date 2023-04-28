@@ -46,15 +46,15 @@ class _CatalogPageState extends State<CatalogPage> with Dialogs {
                           overlayColor: const MaterialStatePropertyAll(
                               Colors.transparent),
                           onTap: () {
-                            showDialogCategory(context);
+                            // showDialogCategory(context);
                           },
                           child: Container(
                             width: 215.w,
                             height: 146.h,
                             decoration: BoxDecoration(
-                                gradient: AppTheme.linearGradient,
-                                borderRadius: BorderRadius.circular(12.r),
-                                color: AppTheme.border),
+                              gradient: AppTheme.linearGradient,
+                              borderRadius: BorderRadius.circular(12.r),
+                            ),
                             child: SvgPicture.asset(
                               'assets/icons/add.svg',
                               fit: BoxFit.none,
@@ -115,55 +115,98 @@ class _CatalogPageState extends State<CatalogPage> with Dialogs {
                           shrinkWrap: true,
                           itemCount:
                               categoryList[selectedCategoryId].items.length,
-                          itemBuilder: (_, index) => GestureDetector(
-                            onTap: () {
-                              pushTo(
-                                  TypesScreen(subCategoryId: index), context);
-                            },
-                            child: AnimationConfiguration.staggeredList(
-                              position: index,
-                              duration: const Duration(milliseconds: 500),
-                              child: SlideAnimation(
-                                verticalOffset: 50.0,
-                                child: FadeInAnimation(
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        width: 100.h,
-                                        height: 100.h,
-                                        margin: EdgeInsets.only(bottom: 6.h),
-                                        padding: EdgeInsets.all(10.h),
-                                        decoration: BoxDecoration(
-                                            gradient: AppTheme.linearGradient,
-                                            borderRadius:
-                                                BorderRadius.circular(12.r),
-                                            color: AppTheme.border),
-                                        child: Image.asset(
+                          itemBuilder: (_, index) {
+                            if (index ==
+                                categoryList[selectedCategoryId].items.length -
+                                    1) {
+                              return AnimationConfiguration.staggeredGrid(
+                                position: index,
+                                duration: const Duration(milliseconds: 600),
+                                columnCount: 3,
+                                child: ScaleAnimation(
+                                  child: FadeInAnimation(
+                                    child: InkWell(
+                                      overlayColor:
+                                          const MaterialStatePropertyAll(
+                                              Colors.transparent),
+                                      onTap: () {
+                                        showDialogSubCategory(context);
+                                      },
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            width: 100.w,
+                                            height: 100.h,
+                                            decoration: BoxDecoration(
+                                              gradient: AppTheme.linearGradient,
+                                              borderRadius:
+                                                  BorderRadius.circular(12.r),
+                                            ),
+                                            child: SvgPicture.asset(
+                                              'assets/icons/add.svg',
+                                              fit: BoxFit.none,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 50.h,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                            return GestureDetector(
+                              onTap: () {
+                                pushTo(
+                                    TypesScreen(subCategoryId: index), context);
+                              },
+                              child: AnimationConfiguration.staggeredList(
+                                position: index,
+                                duration: const Duration(milliseconds: 500),
+                                child: SlideAnimation(
+                                  verticalOffset: 50.0,
+                                  child: FadeInAnimation(
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          width: 100.h,
+                                          height: 100.h,
+                                          margin: EdgeInsets.only(bottom: 6.h),
+                                          padding: EdgeInsets.all(10.h),
+                                          decoration: BoxDecoration(
+                                              gradient: AppTheme.linearGradient,
+                                              borderRadius:
+                                                  BorderRadius.circular(12.r),
+                                              color: AppTheme.border),
+                                          child: Image.asset(
+                                              categoryList[selectedCategoryId]
+                                                  .items[index]
+                                                  .image),
+                                        ),
+                                        SizedBox(
+                                          width: 100.h,
+                                          child: Text(
                                             categoryList[selectedCategoryId]
                                                 .items[index]
-                                                .image),
-                                      ),
-                                      SizedBox(
-                                        width: 100.h,
-                                        child: Text(
-                                          categoryList[selectedCategoryId]
-                                              .items[index]
-                                              .title,
-                                          style: TextStyle(
-                                            fontSize: 14.sp,
-                                            fontFamily: 'Inter',
+                                                .title,
+                                            style: TextStyle(
+                                              fontSize: 14.sp,
+                                              fontFamily: 'Inter',
+                                            ),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            textAlign: TextAlign.center,
                                           ),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      )
-                                    ],
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
+                            );
+                          },
                         ),
                       ),
                     ),
