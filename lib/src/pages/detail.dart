@@ -25,7 +25,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 height: 198.h,
                 decoration: BoxDecoration(
                   image: const DecorationImage(
-                      image: AssetImage('assets/images/def.png'),
+                      image: AssetImage('assets/images/def_image.png'),
                       fit: BoxFit.scaleDown),
                   borderRadius: BorderRadius.circular(12.r),
                   gradient: AppTheme.linearGradient,
