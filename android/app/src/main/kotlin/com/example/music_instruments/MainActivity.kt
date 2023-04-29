@@ -1,4 +1,4 @@
-package com.example.music_instruments
+package om.example.music_instruments
 
 import io.flutter.embedding.android.FlutterActivity
 

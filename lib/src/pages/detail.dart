@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:music_instruments/src/helpers/apptheme.dart';
+import 'package:music_instruments/src/helpers/data/models.dart';
+import 'package:music_instruments/src/pages/audio_payer.dart';
 import 'package:music_instruments/src/widgets/background.dart';
 import 'package:screensize_utils/screensize_util.dart';
 
 class DetailScreen extends StatefulWidget {
-  const DetailScreen({super.key});
+  const DetailScreen({super.key, required this.data});
+
+  final SubCategoryItem data;
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
@@ -17,29 +22,66 @@ class _DetailScreenState extends State<DetailScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               SizedBox(height: 50.h),
-              Container(
-                width: 293.w,
-                height: 198.h,
-                decoration: BoxDecoration(
-                  image: const DecorationImage(
-                      image: AssetImage('assets/images/def_image.png'),
-                      fit: BoxFit.scaleDown),
-                  borderRadius: BorderRadius.circular(12.r),
-                  gradient: AppTheme.linearGradient,
-                ),
+              Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Container(
+                    width: 293.w,
+                    height: 198.h,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(widget.data.image),
+                          fit: BoxFit.scaleDown),
+                      borderRadius: BorderRadius.circular(12.r),
+                      gradient: AppTheme.linearGradient,
+                    ),
+                  ),
+                  if (widget.data.filePath != null)
+                    Positioned(
+                      bottom: -30.h,
+                      right: 10.w,
+                      child: InkWell(
+                        overlayColor:
+                            MaterialStateProperty.all(Colors.transparent),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AudioPlayerPage(
+                                  filePath: widget.data.filePath ?? '',
+                                ),
+                              ));
+                        },
+                        child: Container(
+                          width: 70.h,
+                          height: 70.h,
+                          margin: EdgeInsets.symmetric(horizontal: 20.w),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            gradient: AppTheme.linearGradient,
+                          ),
+                          child: SvgPicture.asset('assets/icons/play.svg',
+                              fit: BoxFit.none),
+                        ),
+                      ),
+                    ),
+                ],
               ),
-              SizedBox(height: 43.h),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 70.w),
+                padding: EdgeInsets.symmetric(horizontal: 70.w, vertical: 36.h),
                 child: Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque commodo lacus at sodales sodales. Quisque sagittis orci ut diam condimentum, vel',
+                  widget.data.desc,
                   style: TextStyle(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Inter'),
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      // letterSpacing: 0.8,
+
+                      fontFamily: "Inter"),
                 ),
               )
             ],

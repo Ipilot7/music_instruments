@@ -23,9 +23,8 @@ class _MainPageState extends State<MainPage> {
         backgroundColor: Colors.transparent,
         body: Stack(
           children: [
-            SizedBox(height: 20.h),
             Positioned(
-              top: 20.h,
+              top: 40.h,
               left: 20.w,
               child: Container(
                   width: 36.w,
@@ -40,7 +39,8 @@ class _MainPageState extends State<MainPage> {
                     style: AppTheme.body18w4,
                   )),
             ),
-            Center(
+            Align(
+              alignment: Alignment(0.1,-0.4),
               child: Transform.rotate(
                 angle: -0.2,
                 child: Text('Laerning\n   Curve', style: AppTheme.body50w6),

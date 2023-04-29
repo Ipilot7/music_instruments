@@ -6,6 +6,7 @@ final List<SubCategoryItem> subCategoryItemsList = [
     (index) => SubCategoryItem(
       id: index,
       subCategoryId: 0,
+      filePath: 'assets/audio/default.mp3',
       title: 'Sato $index',
       image: 'assets/images/def_image.png',
       desc:

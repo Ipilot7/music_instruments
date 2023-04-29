@@ -22,6 +22,7 @@ class TypesScreen extends StatefulWidget {
 
 class _TypesScreenState extends State<TypesScreen> with Dialogs {
   bool isMusic = false;
+
   @override
   Widget build(BuildContext context) {
     return BackgroundApp(
@@ -29,18 +30,19 @@ class _TypesScreenState extends State<TypesScreen> with Dialogs {
         backgroundColor: Colors.transparent,
         body: AnimationLimiter(
           child: GridView.builder(
-            itemCount: subCategoryList[widget.subCategoryId].items.length,
+            itemCount: subCategoryList[widget.subCategoryId].items.length + 1,
             padding: EdgeInsets.symmetric(vertical: 50.h, horizontal: 63.w),
             itemBuilder: (context, index) {
-              if (index ==
-                  subCategoryList[widget.subCategoryId].items.length - 1) {
+              if (index == subCategoryList[widget.subCategoryId].items.length) {
                 return AnimationConfiguration.staggeredGrid(
-                  position: index + 1,
+                  position: index,
                   duration: const Duration(milliseconds: 600),
                   columnCount: 3,
                   child: ScaleAnimation(
                     child: FadeInAnimation(
                       child: InkWell(
+                        overlayColor:
+                            MaterialStateProperty.all(Colors.transparent),
                         onTap: () {
                           showDialogAddItem(context);
                         },
@@ -75,11 +77,16 @@ class _TypesScreenState extends State<TypesScreen> with Dialogs {
                     child: InkWell(
                       overlayColor:
                           MaterialStateProperty.all(Colors.transparent),
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const DetailScreen(),
-                          )),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailScreen(
+                                data: subCategoryList[widget.subCategoryId]
+                                    .items[index],
+                              ),
+                            ));
+                      },
                       child: Column(
                         children: [
                           Container(

@@ -114,11 +114,10 @@ class _CatalogPageState extends State<CatalogPage> with Dialogs {
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
                           itemCount:
-                              categoryList[selectedCategoryId].items.length,
+                              categoryList[selectedCategoryId].items.length+1,
                           itemBuilder: (_, index) {
                             if (index ==
-                                categoryList[selectedCategoryId].items.length -
-                                    1) {
+                                categoryList[selectedCategoryId].items.length) {
                               return AnimationConfiguration.staggeredGrid(
                                 position: index,
                                 duration: const Duration(milliseconds: 600),

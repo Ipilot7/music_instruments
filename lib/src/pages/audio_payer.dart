@@ -12,8 +12,8 @@ import 'package:screensize_utils/screensize_util.dart';
 import 'widgets/notifiers/progress_notifier.dart';
 
 class AudioPlayerPage extends StatefulWidget {
-  const AudioPlayerPage({Key? key}) : super(key: key);
-
+  const AudioPlayerPage({Key? key, required this.filePath}) : super(key: key);
+final String filePath;
   @override
   State<AudioPlayerPage> createState() => _AudioPlayerPageState();
 }
