@@ -7,8 +7,8 @@ class CategoryModel {
 }
 
 class SubCategory {
-  final String image, title;
-  final int id, categoryId;
+  final String? image, title;
+  final int? id, categoryId;
   final List<SubCategoryItem> items;
 
   SubCategory({
@@ -18,19 +18,34 @@ class SubCategory {
     required this.title,
     required this.id,
   });
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'categoryId': categoryId,
+    'title': title,
+    'image': image,
+    'items': items,
+  };
 }
 
 class SubCategoryItem {
   final String image, title, desc;
   final String? filePath;
-  final int id, subCategoryId;
+  final int? id, subCategoryId;
 
   SubCategoryItem({
-    required this.subCategoryId,
+    this.subCategoryId,
     required this.image,
     this.filePath,
     required this.desc,
     required this.title,
-    required this.id,
+    this.id,
   });
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'subCategoryId': subCategoryId,
+    'title': title,
+    'image': image,
+    'filePath': filePath,
+    'desc': desc,
+  };
 }

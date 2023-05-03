@@ -11,14 +11,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  image_picker: ^0.8.7+4
+  firebase_storage: ^11.1.1
   cloud_firestore: ^4.5.3
   firebase_core: ^2.10.0
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.5
+  cached_network_image: ^3.2.3
   shared_preferences: ^2.1.0
   connectivity_plus: ^3.0.4
   http: ^0.13.5
   flutter_svg: ^2.0.5
   audioplayers: ^4.0.1
+  file_picker: ^5.2.11
+  fluttertoast: ^8.2.1
   just_audio: ^0.9.32
   audio_video_progress_bar: ^1.0.1
   flutter_staggered_animations: ^1.1.1
@@ -32,7 +37,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^2.0.1
 
 flutter:
   uses-material-design: true

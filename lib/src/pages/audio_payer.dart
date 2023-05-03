@@ -3,17 +3,20 @@ import 'dart:ui';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:music_instruments/src/helpers/apptheme.dart';
 import 'package:music_instruments/src/pages/widgets/notifiers/play_button_notifier.dart';
 import 'package:music_instruments/src/pages/widgets/page_managet.dart';
+import 'package:music_instruments/src/widgets/custom_cached_image.dart';
 import 'package:screensize_utils/screensize_util.dart';
 
 import 'widgets/notifiers/progress_notifier.dart';
 
 class AudioPlayerPage extends StatefulWidget {
-  const AudioPlayerPage({Key? key, required this.filePath}) : super(key: key);
-final String filePath;
+  const AudioPlayerPage(
+      {Key? key, required this.filePath, required this.imageUrl})
+      : super(key: key);
+  final String filePath, imageUrl;
+
   @override
   State<AudioPlayerPage> createState() => _AudioPlayerPageState();
 }
@@ -24,7 +27,7 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
   @override
   void initState() {
     super.initState();
-    _pageManager = PageManager();
+    _pageManager = PageManager(url: widget.filePath);
   }
 
   @override
@@ -32,8 +35,6 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
     _pageManager.dispose();
     super.dispose();
   }
-
-  AudioPlayer player = AudioPlayer();
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +65,7 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
                           gradient: AppTheme.linearGradient,
                           borderRadius: BorderRadius.circular(12.r),
                           color: AppTheme.border),
+                      child: CustomCachedImage(imageUrl: widget.imageUrl),
                     ),
                   ),
                   const AudioProgressBar(),
@@ -90,7 +92,7 @@ class AudioControlButtons extends StatelessWidget {
         children: [
           InkWell(
             overlayColor: MaterialStateProperty.all(Colors.transparent),
-            onTap:  _pageManager.onPreviousSongButtonPressed,
+            onTap: _pageManager.onPreviousSongButtonPressed,
             child:
                 SvgPicture.asset('assets/icons/rewind.svg', fit: BoxFit.none),
           ),

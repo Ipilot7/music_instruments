@@ -6,11 +6,11 @@ import 'notifiers/progress_notifier.dart';
 class PageManager {
   final progressNotifier = ProgressNotifier();
   final playButtonNotifier = PlayButtonNotifier();
-
+final String url;
   late AudioPlayer _audioPlayer;
   late ConcatenatingAudioSource _playlist;
 
-  PageManager() {
+  PageManager({required this.url}) {
     _init();
   }
 
@@ -25,7 +25,7 @@ class PageManager {
 
   void _setInitialPlaylist() async {
     _playlist = ConcatenatingAudioSource(children: [
-      AudioSource.asset('assets/audio/default.mp3',
+      AudioSource.uri(Uri.parse(url),
           tag: 'Miyagi & Эндшпиль - Не теряя'),
     ]);
     await _audioPlayer.setAudioSource(_playlist);
