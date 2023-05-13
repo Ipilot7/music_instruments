@@ -65,8 +65,8 @@ class _TypesScreenState extends State<TypesScreen> {
                 if (!snapshot.hasData) return Container();
                 var snapshotData = snapshot.data?.docs[widget.categoryId];
                 return GridView.builder(
-                  itemCount: ((snapshotData?.get('items')[widget.subCategoryId]['items']
-                              as List)
+                  itemCount: ((snapshotData?.get('items')[widget.subCategoryId]
+                              ['items'] as List)
                           .length) +
                       1,
                   padding:
@@ -75,8 +75,8 @@ class _TypesScreenState extends State<TypesScreen> {
                     var data = (snapshot.data?.docs[widget.categoryId]
                         .get('items')[widget.subCategoryId]['items'] as List);
                     if (index ==
-                        (snapshotData?.get('items')[widget.subCategoryId]['items']
-                                as List)
+                        (snapshotData?.get('items')[widget.subCategoryId]
+                                ['items'] as List)
                             .length) {
                       return AnimationConfiguration.staggeredGrid(
                         position: index,
@@ -89,8 +89,7 @@ class _TypesScreenState extends State<TypesScreen> {
                                   MaterialStateProperty.all(Colors.transparent),
                               onTap: () {
                                 showAddItemDialog(
-                                  snapshotData?.id ??
-                                      '',
+                                  snapshotData?.id ?? '',
                                   index,
                                   context,
                                 );
@@ -150,16 +149,63 @@ class _TypesScreenState extends State<TypesScreen> {
                                       gradient: AppTheme.linearGradient,
                                       borderRadius: BorderRadius.circular(12.r),
                                       color: AppTheme.border),
-                                  child: CustomCachedImage(
-                                      imageUrl: (snapshotData?.get(
-                                                  'items')[widget.subCategoryId]
-                                          ['items'] as List)[index]['image']),
+                                  child: Stack(
+                                    children: [
+                                      Align(
+                                        alignment: Alignment.center,
+                                        child: CustomCachedImage(
+                                            imageUrl: (snapshotData
+                                                            ?.get('items')[
+                                                        widget.subCategoryId]
+                                                    ['items'] as List)[index]
+                                                ['image']),
+                                      ),
+                                      Positioned(
+                                        top: 10.w,
+                                        right: 10.w,
+                                        child: InkWell(
+                                            onTap: () {
+                                              itemList.removeAt(index);
+                                              FirebaseFirestore.instance
+                                                  .collection('category_model')
+                                                  .doc(snapshot
+                                                      .data
+                                                      ?.docs[widget.categoryId]
+                                                      .id)
+                                                  .set(
+                                                {
+                                                  'id': widget.categoryId,
+                                                  'image':
+                                                      widget.categoryImageUrl,
+                                                  'items':
+                                                      widget.subCategoryList,
+                                                },
+                                              );
+                                            },
+                                            child: Container(
+                                              width: 36.w,
+                                              height: 36.w,
+                                              alignment: Alignment.center,
+                                              // padding: EdgeInsets.all(6.w),
+                                              decoration: BoxDecoration(
+                                                  color: Colors.black38,
+                                                  shape: BoxShape.circle),
+                                              child: const Icon(
+                                                Icons.delete,
+                                                color: Colors.white,
+                                                size: 16,
+                                              ),
+                                            )),
+                                      )
+                                    ],
+                                  ),
                                 ),
                                 SizedBox(height: 24.h),
                                 SizedBox(
                                   width: 215.h,
                                   child: Text(
-                                    (snapshotData?.get('items')[widget.subCategoryId]
+                                    (snapshotData
+                                            ?.get('items')[widget.subCategoryId]
                                         ['items'] as List)[index]['title'],
                                     style: TextStyle(
                                         fontSize: 24.sp, fontFamily: 'Inter'),
