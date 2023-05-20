@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:music_instruments/src/helpers/apptheme.dart';
 import 'package:music_instruments/src/helpers/utils.dart';
 import 'package:music_instruments/src/pages/catalog.dart';
 import 'package:screensize_utils/screensize_util.dart';
-
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
@@ -50,7 +51,23 @@ class _MainPageState extends State<MainPage> {
               bottom: 77.h,
               right: 109.w,
               child: GestureDetector(
-                onTap: () => pushTo(const CatalogPage(), context),
+                onTap: () async{
+                  bool result = await InternetConnectionChecker().hasConnection;
+                  if(result == true) {
+                    pushTo(const CatalogPage(), context);
+                  } else {
+                    Fluttertoast.showToast(
+                        msg: "Internet bilan a'loqa mavjud emas!",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.black38,
+                        textColor: Colors.white,
+                        fontSize: 16.0
+                    );
+                  }
+
+                },
                 child: Container(
                     padding:
                         EdgeInsets.symmetric(horizontal: 31.w, vertical: 3.h),

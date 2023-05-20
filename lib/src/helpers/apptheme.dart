@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:screensize_utils/screensize_util.dart';
 
 class AppTheme {
   static const Color background = Color(0xFF9A7046);
@@ -13,6 +15,26 @@ class AppTheme {
     end: Alignment.bottomRight,
     colors: [AppTheme.primaryColor, Color(0xffF6D891)],
   );
+ static InputDecoration inputDecoration({required String hintText})=> InputDecoration(
+      enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              width: 2.w, color: AppTheme.border),
+          borderRadius: BorderRadius.circular(8.r)),
+      hintText: hintText,
+      hintStyle: TextStyle(
+          fontSize: 18.sp,
+          fontFamily: 'Inter',
+          fontWeight: FontWeight.w500,
+          color: AppTheme.border),
+      focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              width: 2.w, color: AppTheme.border),
+          borderRadius: BorderRadius.circular(8.r)),
+      border: OutlineInputBorder(
+          borderSide: BorderSide(
+              width: 2.w, color: AppTheme.border),
+          borderRadius: BorderRadius.circular(
+              8.r)));
   static const TextStyle textStyle = TextStyle(
     color: Color(0xFFFFFFFF),
     fontFamily: fontFamily,

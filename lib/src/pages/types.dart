@@ -41,7 +41,9 @@ class _TypesScreenState extends State<TypesScreen> {
   String imageUrl = '';
   String fileUrl = '';
   TextEditingController titleController = TextEditingController();
+  TextEditingController titleRuController = TextEditingController();
   TextEditingController descController = TextEditingController();
+  TextEditingController descRuController = TextEditingController();
 
   @override
   void initState() {
@@ -133,7 +135,9 @@ class _TypesScreenState extends State<TypesScreen> {
                                     builder: (context) => DetailScreen(
                                       data: SubCategoryItem(
                                         desc: itemList[index]['desc'],
+                                        descRu: itemList[index]['desc_ru'],
                                         title: itemList[index]['title'],
+                                        titleRu: itemList[index]['title_ru'],
                                         image: itemList[index]['image'],
                                         filePath: itemList[index]['filePath'],
                                       ),
@@ -339,50 +343,32 @@ class _TypesScreenState extends State<TypesScreen> {
                         padding: EdgeInsets.only(top: 15.h),
                         child: TextField(
                           controller: titleController,
-                          decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 2.w, color: AppTheme.border),
-                                  borderRadius: BorderRadius.circular(8.r)),
-                              hintText: 'Nomi',
-                              hintStyle: TextStyle(
-                                  fontSize: 18.sp,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w500,
-                                  color: AppTheme.border),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 2.w, color: AppTheme.border),
-                                  borderRadius: BorderRadius.circular(8.r)),
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 2.w, color: AppTheme.border),
-                                  borderRadius: BorderRadius.circular(8.r))),
+                          decoration:
+                              AppTheme.inputDecoration(hintText: 'Nomi'),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 15.h),
+                        child: TextField(
+                          controller: titleRuController,
+                          decoration:
+                              AppTheme.inputDecoration(hintText: 'Название'),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 15.h),
+                        child: TextField(
+                          controller: descController,
+                          decoration:
+                              AppTheme.inputDecoration(hintText: 'Desc'),
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 15.h),
                         child: TextField(
-                          controller: descController,
-                          decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 2.w, color: AppTheme.border),
-                                  borderRadius: BorderRadius.circular(8.r)),
-                              hintText: 'Desc',
-                              hintStyle: TextStyle(
-                                  fontSize: 18.sp,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w500,
-                                  color: AppTheme.border),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 2.w, color: AppTheme.border),
-                                  borderRadius: BorderRadius.circular(8.r)),
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 2.w, color: AppTheme.border),
-                                  borderRadius: BorderRadius.circular(8.r))),
+                          controller: descRuController,
+                          decoration:
+                              AppTheme.inputDecoration(hintText: 'Описание'),
                         ),
                       ),
                       Padding(
@@ -397,9 +383,11 @@ class _TypesScreenState extends State<TypesScreen> {
                                   id: subId,
                                   image: imageUrl,
                                   desc: descController.text,
+                                  descRu: descRuController.text,
                                   filePath: fileUrl,
                                   subCategoryId: widget.subCategoryId,
                                   title: titleController.text,
+                                  titleRu: titleRuController.text,
                                 ).toJson());
                                 widget.subCategoryList[widget.subCategoryId] = {
                                   'id': widget.subCategoryId,
@@ -407,6 +395,9 @@ class _TypesScreenState extends State<TypesScreen> {
                                   'title': widget
                                           .subCategoryList[widget.subCategoryId]
                                       ['title'],
+                                  'title_ru': widget
+                                          .subCategoryList[widget.subCategoryId]
+                                      ['title_ru'],
                                   'image': widget
                                           .subCategoryList[widget.subCategoryId]
                                       ['image'],
